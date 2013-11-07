@@ -583,6 +583,15 @@ select.small {
     width: 15em;
 }
 
+/* Streaks */
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
 /* PERCENTAGES */
 
 .progress {

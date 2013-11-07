@@ -34,6 +34,25 @@ register = template.Library()
 
 # {{{ Miscellaneous filters
 
+#{{{ streak_css_class: returns the style for a given streak
+@register.filter
+def streak_css_class(value):
+    if value < 0:
+        return "negative"
+    else:
+        return "positive"
+#}}}
+
+#{{{ positive_sign : displays '+' with positive numbers
+@register.filter
+def positive_sign(value):
+    if value >0:
+        return "+"+str(value)
+    else:
+        return value
+#}}}
+
+
 # {{{ markdown: Filters text written in markdown.
 @register.filter
 @stringfilter
