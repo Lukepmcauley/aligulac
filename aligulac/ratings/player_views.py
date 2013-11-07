@@ -46,6 +46,7 @@ from ratings.tools import (
     PATCHES,
     split_matchset,
     total_ratings,
+    get_streaks,
 )
 
 from countries import (
@@ -238,6 +239,10 @@ def player(request, player_id):
     # {{{ Various easy data
     matches = player.get_matchset()
     recent = matches.filter(date__gte=(date.today() - relativedelta(months=2)))
+    
+    #{{{ Win/loss Streaks
+    stvP, stvT, stvZ, stvA = get_streaks(matches, player)
+    #}}}
 
     base.update({
         'player':           player,
@@ -257,6 +262,10 @@ def player(request, player_id):
         'vpf':              count_matchup_player(recent, player, P),
         'vtf':              count_matchup_player(recent, player, T),
         'vzf':              count_matchup_player(recent, player, Z),
+        'stvP':             stvP,
+        'stvT':             stvT,
+        'stvZ':             stvZ,
+        'stvA':             stvA,
     })
 
     if player.country is not None:

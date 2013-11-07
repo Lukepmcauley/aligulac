@@ -299,6 +299,40 @@ def add_counts(queryset):
     return queryset
 # }}}
 
+# {{{ get_streaks: Returns the winngin/losing streaks for a given player, in each match-up
+# and in all match-ups combined
+# Win-streaks are given by positive numbers
+# lossng-streaks by negative 
+def get_streaks(queryset, player):
+    streaks = [] 
+    for race in 'PTZA':
+        onStreak = True;
+        streak = 0;
+        matches = queryset 
+        if not race == 'A':
+            matchesA = matches.filter(pla=player, rcb=race)
+            matchesB = matches.filter(plb=player, rca=race)
+            matches = matchesA | matchesB
+        matches = matches.distinct()
+        matches = matches.order_by('-date','-pk')
+        match = 0;
+        while(onStreak):
+            if(matches[match].get_winner() == player):
+                if(streak >= 0):
+                    streak += 1
+                else:
+                    onStreak = False
+            else:
+                if(streak <= 0):
+                    streak -=1
+                else:
+                    onStreak = False
+            match +=1
+        streaks.append(streak)
+    return tuple(streaks)
+#}}}
+
+
 # {{{ display_matches: Prepare a match queryset for display. Works for both Match and PreMatch objects.
 # Optional arguments:
 # - date: True to display dates, false if not.
