@@ -46,7 +46,7 @@ class test_get_streak_tool(TestCase):
             plb = self.player5,
             sca = 2,
             scb = 1,
-            rca = self.player4.race,
+            rca = 'P',
             rcb = self.player5.race,
             treated = True,
             game = 'HOTS',
@@ -68,14 +68,6 @@ class test_get_streak_tool(TestCase):
         self.assertEqual(va,-2)
         self.assertEqual(vt,0)
         self.assertEqual(vp,-2)
-        self.assertEqual(vz,0)
-
-    def test_against_random_player(self):
-        vp, vt, vz, va = ratings.tools.get_streaks(self.player5.get_matchset(),
-            self.losing_player)
-        self.assertEqual(va,-1)
-        self.assertEqual(vt,0)
-        self.assertEqual(vp,0)
         self.assertEqual(vz,0)
 
     def test_no_matches(self):
