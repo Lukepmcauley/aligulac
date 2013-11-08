@@ -5,6 +5,7 @@ import ratings.tools
 
 class test_get_streak_tool(TestCase):
 
+    #{{{ setup up dummy data for testing
     def setUp(self):
         period = Period.objects.create(start=datetime.date(2013,7,13), end=datetime.date(2013,9,13), computed=True)
         self.winning_player = Player.objects.create(tag="winning_player",race='P')
@@ -51,6 +52,7 @@ class test_get_streak_tool(TestCase):
             game = 'HOTS',
             offline = True
             )
+        #}}}
 
     def test_winning_streaks(self):
         vp, vt, vz, va = ratings.tools.get_streaks(self.winning_player.get_matchset(),
