@@ -316,7 +316,7 @@ def get_streaks(queryset, player):
         matches = matches.distinct()
         matches = matches.order_by('-date','-pk')
         match = 0;
-        while(onStreak):
+        while(onStreak and matches):
             if(matches[match].get_winner() == player):
                 if(streak >= 0):
                     streak += 1

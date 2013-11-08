@@ -1,14 +1,19 @@
+from django.test import TestCase
 from ratings.models import Player, Match
 import ratings.tools
 
-def test_losing_streak():
-    """
-    maru pk = 
-    has a losing streak of -2 versus Protoss
-    """
+class test_get_streak_tool(TestCase):
+    fixtures = ['polls_views_testdata.json']
 
-    maru = Player.objects.get(pk=49)
-    return ratings.tools.get_streak(maru,'P') == -2
+    def test_page_response(self):
+        resp = self.client.get('/players/1/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('stvA' in resp.context)
+    
+    def test_for_losing_player(self):
+        
+        
+        
 
-
+            
 

@@ -378,6 +378,11 @@ table.prizepool {
     width: 40em;
 }
 
+/* ========== STREAK TABLE ============*/
+td.matchup{
+    width: 20em;
+    text-align: center;
+}
 /* ========== MATCHLIST TABLE ========= */
 
 td.lm_date {

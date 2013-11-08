@@ -573,14 +573,35 @@ This is the template for the main player page, called from ratings.views.player.
 {% endif %}
 
 {% if matches %}
+<h3> Current Streaks </h3>
+<div class="table numtable" style="width: 30em;">
+    <div class="rowh">
+        <div class="rowe" style="text-align:center">vAll</div>
+        <div class="rowe">vP</div>
+        <div class="rowe">vT</div>
+        <div class="rowe">vZ</div>
+    </div>
+    <div class="row">
+        <div class="rowe row1 {{stvA|streak_css_class}}" style="text-align:center">{{stvA|positive_sign}}</div>
+        <div class="rowe row1 {{stvP|streak_css_class}}">{{stvP|positive_sign}}</div>
+        <div class="rowe row1 {{stvT|streak_css_class}}">{{stvT|positive_sign}}</div>
+        <div class="rowe row1 {{stvZ|streak_css_class}}">{{stvZ|positive_sign}}</div>
+    </div>
+</div>
+{% endif %}
+
+{% if matches %}
 <h3>Most recent results</h3>
 <table class="results">
 {% include "matchlist.html" with lm_list=matches lm_header="info" %}
 </table>
 {% endif %}
 
+
+
 {% if teammems %}
 <h3>Team history</h3>
+
 <div class="table numtable" style="width: 67em;">
     <div class="rowh">
         <div class="rowe" style="width: 30em;">Team</div>

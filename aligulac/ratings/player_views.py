@@ -502,6 +502,11 @@ def results(request, player_id):
         matches = matches.filter(date__lte=form.cleaned_data['before'])
     # }}}
 
+    #{{{ Win/loss Streaks
+    stvP, stvT, stvZ, stvA = get_streaks(matches, player)
+    #}}}
+
+
     # {{{ Statistics
     base['matches'] = display_matches(matches, fix_left=player)
     base.update({
@@ -509,6 +514,10 @@ def results(request, player_id):
         'sc_op':  sum([m['plb_score'] for m in base['matches']]),
         'msc_my': sum([1 if m['pla_score'] > m['plb_score'] else 0 for m in base['matches']]),
         'msc_op': sum([1 if m['plb_score'] > m['pla_score'] else 0 for m in base['matches']]),
+        'stvA' : stvA,
+        'stvP' : stvP,
+        'stvT' : stvT,
+        'stvZ' : stvZ,
     })
     # }}}
 
